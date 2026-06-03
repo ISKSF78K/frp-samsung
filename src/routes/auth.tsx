@@ -12,15 +12,15 @@ import { toast } from "sonner";
 import { Lock } from "lucide-react";
 
 export const Route = createFileRoute("/auth")({
-  head: () => ({ meta: [{ title: "Connexion — Samsung Lock Tool" }] }),
+  head: () => ({ meta: [{ title: "Log In — Samsung Lock Tool" }] }),
   component: AuthPage,
 });
 
-const emailSchema = z.string().email("Email invalide").max(255);
-const passwordSchema = z.string().min(6, "Min 6 caractères").max(72);
-const usernameSchema = z.string().min(3, "Min 3 caractères").max(30).regex(/^[a-zA-Z0-9_-]+$/, "Lettres, chiffres, _ ou - uniquement");
+const emailSchema = z.string().email("Invalid email address, please try again").max(255);
+const passwordSchema = z.string().min(6, "Minimum 6 characters required").max(72);
+const usernameSchema = z.string().min(3, "Minimum 3 characters required").max(30).regex(/^[a-zA-Z0-9_-]+$/, "Letters, numbers, _ or - only");
 
-function AuthPage() {
+function AuthPage() 
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -50,7 +50,7 @@ function AuthPage() {
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     setLoading(false);
     if (error) return toast.error(error.message);
-    toast.success("Connecté !");
+    toast.success("Connected!");
   };
 
   const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -77,7 +77,7 @@ function AuthPage() {
     });
     setLoading(false);
     if (error) return toast.error(error.message);
-    toast.success("Compte créé !");
+    toast.success("Account created !");
   };
 
   const handleGoogle = async () => {
@@ -85,7 +85,7 @@ function AuthPage() {
     const result = await lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin + "/dashboard" });
     if (result.error) {
       setLoading(false);
-      toast.error(result.error.message || "Erreur Google");
+      toast.error(result.error.message || "Error Google");
     }
   };
 
@@ -102,8 +102,8 @@ function AuthPage() {
         <Card className="p-6">
           <Tabs defaultValue="login">
             <TabsList className="grid grid-cols-2 w-full mb-6">
-              <TabsTrigger value="login">Connexion</TabsTrigger>
-              <TabsTrigger value="signup">Inscription</TabsTrigger>
+              <TabsTrigger value="login">Log In</TabsTrigger>
+              <TabsTrigger value="signup">Sign Up</TabsTrigger>
             </TabsList>
 
             <TabsContent value="login">
@@ -117,7 +117,7 @@ function AuthPage() {
                   <Input id="login-password" name="password" type="password" required />
                 </div>
                 <Button type="submit" className="w-full" disabled={loading}>
-                  {loading ? "..." : "Se connecter"}
+                  {loading ? "..." : "Log In!"}
                 </Button>
               </form>
             </TabsContent>
@@ -125,7 +125,7 @@ function AuthPage() {
             <TabsContent value="signup">
               <form onSubmit={handleSignup} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="signup-username">Nom d'utilisateur</Label>
+                  <Label htmlFor="signup-username">Username</Label>
                   <Input id="signup-username" name="username" required />
                 </div>
                 <div className="space-y-2">
@@ -133,28 +133,21 @@ function AuthPage() {
                   <Input id="signup-email" name="email" type="email" required />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="signup-password">Mot de passe</Label>
+                  <Label htmlFor="signup-password">Password</Label>
                   <Input id="signup-password" name="password" type="password" required minLength={6} />
                 </div>
                 <Button type="submit" className="w-full" disabled={loading}>
-                  {loading ? "..." : "Créer un compte"}
+                  {loading ? "..." : "Create Account"}
                 </Button>
               </form>
             </TabsContent>
           </Tabs>
-
           <div className="relative my-6">
-            <div className="absolute inset-0 flex items-center"><span className="w-full border-t" /></div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-card px-2 text-muted-foreground">Ou</span>
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t" />
             </div>
-          </div>
-
-          <Button variant="outline" className="w-full" onClick={handleGoogle} disabled={loading}>
-            Continuer avec Google
-          </Button>
+          </div>  {/* Ferme proprement la div de la ligne 146 */}
         </Card>
       </div>
     </div>
   );
-}

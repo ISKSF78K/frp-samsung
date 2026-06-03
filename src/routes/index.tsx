@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Samsung Lock Tool — Protection anti-vol professionnelle" },
-      { name: "description", content: "Outil professionnel de protection anti-vol pour appareils Samsung. Verrouillage à distance par USB en quelques secondes." },
+      { title: "Samsung Lock Tool - The Best Bypasser" },
+      { name: "description", content: "Professional Tool Unlocker" },
     ],
   }),
   component: Landing,
@@ -22,11 +22,11 @@ function Landing() {
             <div className="h-9 w-9 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
               <Lock className="h-5 w-5 text-primary-foreground" />
             </div>
-            <span className="font-bold text-lg tracking-tight">Samsung Lock Tool</span>
+            <span className="font-bold text-lg tracking-tight">Frp Samsung Unlocker</span>
           </div>
           <div className="flex items-center gap-3">
-            <Button asChild variant="ghost"><Link to="/auth">Connexion</Link></Button>
-            <Button asChild><Link to="/auth">Démarrer</Link></Button>
+            <Button asChild variant="ghost"><Link to="/auth">Log in</Link></Button>
+            <Button asChild><Link to="/auth">Start</Link></Button>
           </div>
         </div>
       </header>
@@ -35,19 +35,19 @@ function Landing() {
       <section className="container mx-auto px-6 py-24 text-center">
         <div className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-muted/30 px-4 py-1.5 text-xs text-muted-foreground mb-8">
           <Shield className="h-3.5 w-3.5" />
-          Protection anti-vol nouvelle génération
+          Unlock Your Phone Android 16 Patch February 2026 ECT
         </div>
         <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent">
-          Verrouillez vos Samsung
-          <br />en un clic.
+          Unlock Your Samsung
+          <br />In One Click
         </h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
-          Système de blocage à distance via USB. 5 crédits par opération. Logs en temps réel,
-          historique complet, panneau admin.
+          Bypass your Samsung in 5 minutes
+          
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Button asChild size="lg" className="gap-2">
-            <Link to="/auth">Créer un compte <ArrowRight className="h-4 w-4" /></Link>
+            <Link to="/auth">Create a new Account <ArrowRight className="h-4 w-4" /></Link>
           </Button>
         </div>
       </section>
@@ -55,9 +55,9 @@ function Landing() {
       {/* Features */}
       <section className="container mx-auto px-6 pb-24 grid md:grid-cols-3 gap-6">
         {[
-          { icon: Zap, title: "Rapide", desc: "Verrouillage en moins de 10 secondes via USB." },
-          { icon: Shield, title: "Sécurisé", desc: "Compte protégé, crédits débités automatiquement." },
-          { icon: Lock, title: "Définitif", desc: "L'appareil doit être reflashé pour être récupéré." },
+        
+          { icon: Shield, title: "Safe", desc: "Fast, clean, and unlocked in just one minute." },
+           
         ].map((f) => (
           <div key={f.title} className="rounded-xl border border-border/60 bg-card/50 p-6 hover:border-primary/40 transition-colors">
             <f.icon className="h-6 w-6 text-primary mb-4" />
@@ -68,7 +68,7 @@ function Landing() {
       </section>
 
       <footer className="border-t border-border/40 py-8 text-center text-xs text-muted-foreground">
-        © 2026 Samsung Lock Tool. Outil légitime de protection anti-vol.
+        2026 Samsung Tools Frp
       </footer>
     </div>
   );
