@@ -19,11 +19,10 @@ const emailSchema = z.string().email("Invalid email").max(255);
 const passwordSchema = z.string().min(6, "Min 6 characters").max(72);
 const usernameSchema = z.string().min(3, "Min 3 characters").max(30).regex(/^[a-zA-Z0-9_-]+$/, "Letters, numbers, _ or - only");
 
-function AuthPage() 
+function AuthPage() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
-  // Redirect if already signed in
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => {
       if (data.user) navigate({ to: "/dashboard", replace: true });
@@ -50,6 +49,8 @@ function AuthPage()
     setLoading(false);
     if (error) return toast.error(error.message);
     toast.success("Logged in!");
+  };
+
   const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
@@ -130,8 +131,8 @@ function AuthPage()
               </form>
             </TabsContent>
           </Tabs>
-      </Card>
+        </Card>
+      </div>
     </div>
-  </div>
   );
-};
+}
