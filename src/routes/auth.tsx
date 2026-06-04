@@ -2,7 +2,6 @@ import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
-import { lovable } from "@/integrations/lovable/index";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -12,13 +11,13 @@ import { toast } from "sonner";
 import { Lock } from "lucide-react";
 
 export const Route = createFileRoute("/auth")({
-  head: () => ({ meta: [{ title: "Log In — Samsung Lock Tool" }] }),
+  head: () => ({ meta: [{ title: "Login — Samsung Lock Tool" }] }),
   component: AuthPage,
 });
 
-const emailSchema = z.string().email("Invalid email address, please try again").max(255);
-const passwordSchema = z.string().min(6, "Minimum 6 characters required").max(72);
-const usernameSchema = z.string().min(3, "Minimum 3 characters required").max(30).regex(/^[a-zA-Z0-9_-]+$/, "Letters, numbers, _ or - only");
+const emailSchema = z.string().email("Invalid email").max(255);
+const passwordSchema = z.string().min(6, "Min 6 characters").max(72);
+const usernameSchema = z.string().min(3, "Min 3 characters").max(30).regex(/^[a-zA-Z0-9_-]+$/, "Letters, numbers, _ or - only");
 
 function AuthPage() 
   const navigate = useNavigate();
@@ -50,9 +49,7 @@ function AuthPage()
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     setLoading(false);
     if (error) return toast.error(error.message);
-    toast.success("Connected!");
-  };
-
+    toast.success("Logged in!");
   const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
@@ -77,16 +74,7 @@ function AuthPage()
     });
     setLoading(false);
     if (error) return toast.error(error.message);
-    toast.success("Account created !");
-  };
-
-  const handleGoogle = async () => {
-    setLoading(true);
-    const result = await lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin + "/dashboard" });
-    if (result.error) {
-      setLoading(false);
-      toast.error(result.error.message || "Error Google");
-    }
+    toast.success("Account created!");
   };
 
   return (
@@ -113,11 +101,11 @@ function AuthPage()
                   <Input id="login-email" name="email" type="email" required />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="login-password">Mot de passe</Label>
+                  <Label htmlFor="login-password">Password</Label>
                   <Input id="login-password" name="password" type="password" required />
                 </div>
                 <Button type="submit" className="w-full" disabled={loading}>
-                  {loading ? "..." : "Log In!"}
+                  {loading ? "..." : "Log In"}
                 </Button>
               </form>
             </TabsContent>
@@ -142,12 +130,8 @@ function AuthPage()
               </form>
             </TabsContent>
           </Tabs>
-          <div className="relative my-6">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t" />
-            </div>
-          </div>  {/* Ferme proprement la div de la ligne 146 */}
-        </Card>
-      </div>
+      </Card>
     </div>
+  </div>
   );
+};
